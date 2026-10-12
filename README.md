@@ -14,7 +14,7 @@ Open <http://localhost:8000/>. You can also open `index.html` directly, but a lo
 
 ## Deploy to GitHub Pages
 
-1. Push the site files and `Sandip_Sahu_Full_Stack_Developer.docx` to the repository's `main` branch.
+1. Push the site files, `profile.png`, and `Sandip-Sahu-FullStack-Developer_AugV1 (1).pdf` to the repository's `main` branch.
 2. In GitHub, open **Settings → Pages**.
 3. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/(root)`, then save.
 4. Wait for the Pages deployment to finish. GitHub will show the published URL in the Pages settings.
