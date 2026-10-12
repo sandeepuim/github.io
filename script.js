@@ -20,12 +20,33 @@ menuToggle.addEventListener("click", () => {
 });
 
 siteNav.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLAnchorElement && siteNav.classList.contains("is-open")) {
+  if (event.target instanceof Element && event.target.closest("a") && siteNav.classList.contains("is-open")) {
     siteNav.classList.remove("is-open");
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute("aria-label", "Open navigation menu");
   }
 });
+
+const navigationLinks = [...siteNav.querySelectorAll('a[href^="#"]')];
+const navigationTargets = navigationLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter((target) => target !== null);
+
+const navigationObserver = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+
+    for (const link of navigationLinks) {
+      if (link.hash === `#${entry.target.id}`) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  }
+}, { rootMargin: "-25% 0px -65% 0px" });
+
+navigationTargets.forEach((target) => navigationObserver.observe(target));
 
 const updateContactClock = () => {
   const time = new Intl.DateTimeFormat("en-IN", {
